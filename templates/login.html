@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ore-panel">
+    <h2 class="ore-panel__title">Sign In</h2>
+    <div class="ore-panel__content">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="ore-form-group">
+                {{ form.username.label }}<br>
+                {{ form.username(class_='ore-input', size=32) }}<br>
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div class="ore-form-group">
+                {{ form.password.label }}<br>
+                {{ form.password(class_='ore-input', size=32) }}<br>
+                {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div class="ore-form-group">
+                {{ form.remember_me() }} {{ form.remember_me.label }}
+            </div>
+            <div class="ore-form-group">
+                {{ form.submit(class_='ore-button ore-button--primary') }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ore-ui.css') }}">
+    
+    <title>{% block title %}Kursus Online Minecraft{% endblock %}</title>
+</head>
+<body class="ore-ui-light-theme">
+
+    <div class="ore-container" style="padding-top: 20px;">
+        
+        <header class="ore-panel" style="margin-bottom: 20px;">
+            <div class="ore-panel__content" style="display: flex; justify-content: space-between; align-items: center;">
+                <h1 style="margin: 0;">Kursus Online</h1>
+                <nav>
+                    {% if current_user.is_authenticated %}
+                        <span>Hi, {{ current_user.username }}!</span>
+                        <a href="{{ url_for('logout') }}" class="ore-button ore-button--link">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="ore-button ore-button--link">Login</a>
+                        <a href="{{ url_for('register') }}" class="ore-button ore-button--link">Register</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="ore-panel ore-panel--positive" style="margin-bottom: 20px;">
+            <ul style="margin: 0; padding-left: 20px;">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+    </div>
+
+    <script src="{{ url_for('static', filename='js/ore-ui.js') }}"></script>
+</body>
+</html>
